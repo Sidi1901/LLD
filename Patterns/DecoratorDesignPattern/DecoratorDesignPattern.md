@@ -52,12 +52,12 @@ ConcreteDecoratorA / ConcreteDecoratorB
 
 ## Participants
 
-| Participant            | Role |
-|------------------------|------|
-| **Component**          | Interface that both the concrete component and decorators implement |
-| **ConcreteComponent**  | The base object being wrapped |
-| **BaseDecorator**      | Holds a reference to a Component; delegates calls to it |
-| **ConcreteDecorator**  | Adds behavior before/after delegating to the wrapped component |
+| Participant           | Role                                                                |
+| --------------------- | ------------------------------------------------------------------- |
+| **Component**         | Interface that both the concrete component and decorators implement |
+| **ConcreteComponent** | The base object being wrapped                                       |
+| **BaseDecorator**     | Holds a reference to a Component; delegates calls to it             |
+| **ConcreteDecorator** | Adds behavior before/after delegating to the wrapped component      |
 
 ---
 
@@ -227,22 +227,22 @@ int main() {
 
 ## Decorator vs Inheritance
 
-| | Inheritance | Decorator |
-|--|-------------|-----------|
-| **When** | Compile time | Runtime |
-| **Flexibility** | Fixed combinations | Any combination |
-| **Class count** | Grows exponentially | Grows linearly |
-| **Coupling** | Tight (parent–child) | Loose (via interface) |
+|                 | Inheritance          | Decorator             |
+| --------------- | -------------------- | --------------------- |
+| **When**        | Compile time         | Runtime               |
+| **Flexibility** | Fixed combinations   | Any combination       |
+| **Class count** | Grows exponentially  | Grows linearly        |
+| **Coupling**    | Tight (parent–child) | Loose (via interface) |
 
 ---
 
 ## Related Patterns
 
-| Pattern | Relationship |
-|---------|-------------|
-| **Composite** | Both use recursive composition; Composite aggregates children, Decorator wraps exactly one |
-| **Strategy** | Strategy changes the *algorithm*; Decorator changes the *skin* (adds to existing behavior) |
-| **Proxy** | Proxy controls access; Decorator adds behavior — similar structure, different intent |
+| Pattern                     | Relationship                                                                               |
+| --------------------------- | ------------------------------------------------------------------------------------------ |
+| **Composite**               | Both use recursive composition; Composite aggregates children, Decorator wraps exactly one |
+| **Strategy**                | Strategy changes the _algorithm_; Decorator changes the _skin_ (adds to existing behavior) |
+| **Proxy**                   | Proxy controls access; Decorator adds behavior — similar structure, different intent       |
 | **Chain of Responsibility** | Also chains objects; CoR passes a request until one handles it, Decorator always delegates |
 
 ---

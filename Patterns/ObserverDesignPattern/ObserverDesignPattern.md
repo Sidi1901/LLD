@@ -39,12 +39,12 @@ ConcreteObserver
 
 ## Participants
 
-| Participant         | Role |
-|---------------------|------|
-| **Subject**         | Maintains a list of observers; provides attach/detach/notify methods |
-| **Observer**        | Interface with an `update()` method |
-| **ConcreteSubject** | Holds state; calls `notify()` when state changes |
-| **ConcreteObserver**| Implements `update()`; reacts to Subject's changes |
+| Participant          | Role                                                                 |
+| -------------------- | -------------------------------------------------------------------- |
+| **Subject**          | Maintains a list of observers; provides attach/detach/notify methods |
+| **Observer**         | Interface with an `update()` method                                  |
+| **ConcreteSubject**  | Holds state; calls `notify()` when state changes                     |
+| **ConcreteObserver** | Implements `update()`; reacts to Subject's changes                   |
 
 ---
 
@@ -164,9 +164,9 @@ int main() {
 
 ## Push vs Pull Model
 
-| Model | Description | Trade-off |
-|-------|-------------|-----------|
-| **Push** | Subject sends data in `update(data)` | Observer gets data it may not need |
+| Model    | Description                                           | Trade-off                                                      |
+| -------- | ----------------------------------------------------- | -------------------------------------------------------------- |
+| **Push** | Subject sends data in `update(data)`                  | Observer gets data it may not need                             |
 | **Pull** | Observer calls `subject.getState()` inside `update()` | Observer controls what it fetches; tighter coupling to Subject |
 
 ---
@@ -195,8 +195,8 @@ int main() {
 
 ## Related Patterns
 
-| Pattern | Relationship |
-|---------|-------------|
-| **Mediator** | Mediator centralizes communication; Observer distributes it |
+| Pattern                 | Relationship                                                              |
+| ----------------------- | ------------------------------------------------------------------------- |
+| **Mediator**            | Mediator centralizes communication; Observer distributes it               |
 | **Event Bus / Pub-Sub** | Decoupled variant — observers subscribe to topic, not to Subject directly |
-| **Strategy** | Often used together; observers can swap behavior strategies |
+| **Strategy**            | Often used together; observers can swap behavior strategies               |

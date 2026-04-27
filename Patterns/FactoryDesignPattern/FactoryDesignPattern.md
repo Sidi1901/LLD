@@ -6,11 +6,15 @@ The **Factory Design Pattern** is a creational design pattern that provides an i
 
 There are three closely related variants:
 
-| Variant | Description |
-|---|---|
-| **Simple Factory** | A single class/method creates objects based on input |
-| **Factory Method** | Subclasses decide which class to instantiate |
-| **Abstract Factory** | Creates families of related objects |
+| Variant              | Description                                          |
+| -------------------- | ---------------------------------------------------- |
+| **Simple Factory**   | A single class/method creates objects based on input |
+| **Factory Method**   | Subclasses decide which class to instantiate         |
+| **Abstract Factory** | Creates families of related objects                  |
+
+---
+
+## The Gang of Four (GoF) design patterns are 23 classic, proven software design solutions to common, recurring problems in object-oriented programming, documented in the 1994 book Design Patterns: Elements of Reusable Object-Oriented Software by Erich Gamma, Richard Helm, Ralph Johnson, and John Vlissides. These patterns improve code reusability, maintainability, and scalability by providing standardized templates for structuring objects and classes.
 
 ---
 
@@ -59,6 +63,9 @@ The Factory Pattern solves this by:
 ## Variant 1: Simple Factory
 
 Not a formal GoF pattern, but widely used. A single static method creates objects based on a parameter.
+Centralized creation logic (usually if-else or switch)
+Easy to use
+❌ Violates Open/Closed Principle (adding new type → modify factory)
 
 ```cpp
 class Notification {
@@ -112,6 +119,12 @@ int main() {
 ## Variant 2: Factory Method (GoF)
 
 Defines an interface for creating an object, but lets subclasses decide which class to instantiate. The factory method is declared in a base creator class and overridden by subclasses.
+👉 Idea: Delegate object creation to subclasses
+Instead of one factory deciding everything, each subclass decides what to create.
+No if-else
+Follows Open/Closed Principle ✅
+Uses polymorphism
+More scalable
 
 ### Key Components
 
@@ -193,6 +206,24 @@ int main() {
     delete logistics;
 }
 ```
+
+| Aspect        | Simple Factory        | Factory Method          |
+| ------------- | --------------------- | ----------------------- |
+| Type          | Not official pattern  | GoF pattern             |
+| Logic         | Centralized (if-else) | Delegated to subclasses |
+| Extensibility | Modify factory        | Add new subclass        |
+| Complexity    | Simple                | More structured         |
+| OCP           | Violates              | Follows                 |
+
+#### 🧠 When to use what?
+
+##### Use Simple Factory
+
+→ when object types are few and unlikely to change
+
+##### Use Factory Method
+
+→ when system should be extensible and follow SOLID
 
 ---
 
@@ -379,14 +410,14 @@ Different game levels use different factories to spawn different types of enemie
 
 ## Comparison with Other Patterns
 
-| Pattern | Purpose | Key Difference |
-|---|---|---|
-| **Simple Factory** | Centralize object creation | Not a formal GoF pattern; uses a static method |
-| **Factory Method** | Let subclasses decide what to create | One product type, multiple creator subclasses |
-| **Abstract Factory** | Create families of related products | Multiple product types, grouped into families |
-| **Builder** | Construct complex objects step by step | Focuses on construction process, not type selection |
-| **Prototype** | Clone existing objects | Creates via copying, not via a factory |
-| **Strategy** | Choose algorithm at runtime | Encapsulates behavior, not object creation |
+| Pattern              | Purpose                                | Key Difference                                      |
+| -------------------- | -------------------------------------- | --------------------------------------------------- |
+| **Simple Factory**   | Centralize object creation             | Not a formal GoF pattern; uses a static method      |
+| **Factory Method**   | Let subclasses decide what to create   | One product type, multiple creator subclasses       |
+| **Abstract Factory** | Create families of related products    | Multiple product types, grouped into families       |
+| **Builder**          | Construct complex objects step by step | Focuses on construction process, not type selection |
+| **Prototype**        | Clone existing objects                 | Creates via copying, not via a factory              |
+| **Strategy**         | Choose algorithm at runtime            | Encapsulates behavior, not object creation          |
 
 ---
 

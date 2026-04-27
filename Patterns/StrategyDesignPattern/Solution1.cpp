@@ -52,19 +52,23 @@ public:
     {
         strategy = s;
     }
+    void buildRoute(const string &from, const string &to)
+    {
+        strategy->buildRoute(from, to);
+    }
 };
 
 int main()
 {
     Navigator nav1(new DrivingStrategy());
-    nav1.strategy->buildRoute("Home", "Office");
+    nav1.buildRoute("Home", "Office");
 
     Navigator nav2(new WalkingStrategy());
-    nav2.strategy->buildRoute("Hotel", "Museum");
+    nav2.buildRoute("Hotel", "Museum");
 
     nav2.setStrategy(new DrivingStrategy()); // Switching strategy at runtime
-    nav2.strategy->buildRoute("Hotel", "Museum");
+    nav2.buildRoute("Hotel", "Museum");
 
     Navigator nav3(new CyclingStrategy());
-    nav3.strategy->buildRoute("Park", "Beach");
+    nav3.buildRoute("Park", "Beach");
 }

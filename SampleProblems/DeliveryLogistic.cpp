@@ -110,4 +110,16 @@ int main()
 {
     TransportFactory *f1 = new RoadTransportFactory();
     f1->deliverPackage();
+
+    TransportFactory *f2 = new SeaTransportFactory();
+    f2->deliverPackage();
+
+    TransportFactory *f3 = new AirTransportFactory();
+    f3->deliverPackage();
+
+    delete f1;
+    delete f2;
+    delete f3;
+
+    return 0;
 }

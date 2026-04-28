@@ -83,3 +83,21 @@ See Example no.4 in Introduction.cpp
 Hint to the compiler to replace the function call with the function body directly, avoiding call overhead. Commonly used for small, frequently called methods defined inside the class body (implicitly inline).
 
 See Example no.5 in Introduction.cpp
+
+#### Initializer List in Constructor
+Syntax: `ClassName(params) : member1(val1), member2(val2) { }`
+
+Runs before the constructor body. Preferred over assignment inside the body because:
+- **Required** for `const` members, reference members, and base class constructors.
+- **More efficient** — directly constructs members instead of default-constructing then assigning.
+
+```cpp
+class Point {
+    const int x;   // const — must use initializer list
+    int y;
+public:
+    Point(int x, int y) : x(x), y(y) {}   // correct
+};
+```
+
+See Example no.6 in Introduction.cpp

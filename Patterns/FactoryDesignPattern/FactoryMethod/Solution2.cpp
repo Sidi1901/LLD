@@ -39,6 +39,12 @@ class NotificationFactory
 {
 public:
     virtual Notification *createNotification() = 0; // Pure virtual function to be implemented by concrete factories
+    void sendNotification(const string &message)
+    {
+        Notification *notification = createNotification(); // Create a notification using the factory method
+        notification->send(message);                       // Send the notification
+        delete notification;                               // Clean up memory
+    }
 };
 
 class EmailNotificationFactory : public NotificationFactory
@@ -71,20 +77,16 @@ public:
 int main()
 {
     NotificationFactory *factory1 = new EmailNotificationFactory();
-    Notification *notification1 = factory1->createNotification();
-    notification1->send("Hello via Email!");
+    factory1->sendNotification("Hello via Email!");
 
     NotificationFactory *factory2 = new SMSNotificationFactory();
-    Notification *notification2 = factory2->createNotification();
-    notification2->send("Hello via SMS!");
+    factory2->sendNotification("Hello via SMS!");
 
     NotificationFactory *factory3 = new PushNotificationFactory();
     Notification *notification3 = factory3->createNotification();
     notification3->send("Hello via Push Notification!");
 
-    delete notification1;
     delete factory1;
-    delete notification2;
     delete factory2;
     delete notification3;
     delete factory3;

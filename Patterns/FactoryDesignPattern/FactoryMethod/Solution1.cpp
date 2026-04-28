@@ -39,6 +39,12 @@ class ShapeFactory
 {
 public:
     virtual Shape *createShape() = 0; // Pure virtual function to be implemented by concrete factories
+    void drawShape()
+    {
+        Shape *shape = createShape(); // Create a shape using the factory method
+        shape->draw();                // Draw the shape
+        delete shape;                 // Clean up memory
+    }
 };
 
 class CircleFactory : public ShapeFactory
@@ -75,10 +81,8 @@ int main()
     s1->draw();
 
     ShapeFactory *factory2 = new SquareFactory();
-    Shape *s2 = factory2->createShape();
-    s2->draw();
+    factory2->drawShape();
 
     ShapeFactory *factory3 = new TriangleFactory();
-    Shape *s3 = factory3->createShape();
-    s3->draw();
+    factory3->drawShape();
 }

@@ -3,6 +3,9 @@
 #include <unordered_map>
 using namespace std;
 
+// 🧾 Problem Statement: Stock Price Notification System
+// Design a system where users can subscribe to stock price updates and get notified whenever the price changes.
+
 // 🎯 Requirements
 // There is a Stock (e.g., Apple, Google).
 // Users can:

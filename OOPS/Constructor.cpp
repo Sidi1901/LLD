@@ -62,7 +62,8 @@ public:
         data = new int(val);
     }
 
-    // compiler-generated copy constructor does: data = other.data  (same pointer!)
+    // both pointers point to the same memory after copy
+    // Shallow(const Shallow& other) : data(other.data) {}
 
     ~Shallow() { delete data; }   // double-free when both objects die
 };
@@ -84,6 +85,19 @@ public:
 };
 
 void example3() {
+    // Shallow copy — both share the same pointer
+    Shallow s1(10);
+    Shallow s2 = s1;            // s2.data == s1.data (same address)
+
+    *s2.data = 99;
+    cout << "s1.data = " << *s1.data << "\n";   // 99  (mutated through s2!)
+    cout << "s2.data = " << *s2.data << "\n";   // 99
+    cout << "same pointer? " << (s1.data == s2.data ? "yes" : "no") << "\n";
+    // ⚠ s1's destructor deletes the pointer, then s2's destructor deletes it again — UB
+
+    cout << "\n";
+
+    // Deep copy — each object owns its own memory
     Deep a(42);
     Deep b = a;             // deep copy — b gets its own memory
 
@@ -166,7 +180,7 @@ void example7() {
 int main() {
     cout << "=== Example 1: Default Constructor ===\n";       example1();
     cout << "\n=== Example 2: Parameterized + Overloading ===\n"; example2();
-    cout << "\n=== Example 3: Copy Constructor (Deep) ===\n"; example3();
+    cout << "\n=== Example 3: Copy Constructor (Shallow vs Deep) ===\n"; example3();
     cout << "\n=== Example 4: Member Initializer List ===\n"; example4();
     cout << "\n=== Example 7: Constructor in Inheritance ===\n"; example7();
 }

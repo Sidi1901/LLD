@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
 using namespace std;
-
+// --------------------------------------------------------------------------------
 // ── Example 1 : Class and Object ────────────────────────────────────────────
+// --------------------------------------------------------------------------------
 class Car {
 private:
     string brand;
@@ -145,10 +146,52 @@ void example5() {
 }
 
 
+//-------------------------------------------------------------------------------
+// ── Example 6 : Initializer List ─────────────────────────────────────────────
+//-------------------------------------------------------------------------------
+class Point {
+    const int x;   // const member — MUST be set via initializer list
+    int y;
+    string label;
+
+public:
+    // initializer list runs before constructor body
+    Point(int x, int y, string label) : x(x), y(y), label(label) {}
+
+    void display() const {
+        cout << label << " (" << x << ", " << y << ")\n";
+    }
+};
+
+class Line {
+    Point start;   // no default constructor — base must be initialised in list
+    Point end;
+
+public:
+    Line(Point s, Point e) : start(s), end(e) {}
+
+    void display() const {
+        cout << "Start: "; start.display();
+        cout << "End:   "; end.display();
+    }
+};
+
+void example6() {
+    Point p1(0, 0, "Origin");
+    Point p2(3, 4, "Target");
+    p1.display();
+    p2.display();
+
+    Line l(p1, p2);
+    l.display();
+}
+
+
 int main() {
     cout << "=== Example 1: Class and Object ===\n"; example1();
     cout << "\n=== Example 2: this pointer ===\n";   example2();
     cout << "\n=== Example 3: friend ===\n";          example3();
     cout << "\n=== Example 4: mutable ===\n";         example4();
     cout << "\n=== Example 5: inline ===\n";          example5();
+    cout << "\n=== Example 6: Initializer List ===\n"; example6();
 }

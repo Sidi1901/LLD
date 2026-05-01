@@ -3,6 +3,7 @@
 > **"High-level modules should not depend on low-level modules. Both should depend on abstractions."**
 > — Robert C. Martin
 
+
 ## What It Means
 
 Two rules:
@@ -57,7 +58,7 @@ Swap `EmailNotifier` for `SMSNotifier` — `NotificationService` never changes.
 
 DIP is about **who controls the dependency**. In the bad version, `BadNotificationService` creates and owns `BadEmailSender` — it controls it. In the good version, the dependency is **passed in from outside** — the caller controls it.
 
-This is the foundation of **Dependency Injection (DI)**, which is how most large frameworks (Spring, ASP.NET, etc.) are structured.
+It's not about inverting who calls who — NotificationService still calls send(). It's about inverting who owns the contract. Before, EmailSender owned its own interface. After, the abstraction INotifier owns it, and EmailSender must confirm to it
 
 ### DIP violation smells:
 - A class uses `new ConcreteClass()` inside itself

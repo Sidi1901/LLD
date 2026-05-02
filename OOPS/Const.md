@@ -2,6 +2,11 @@
 
 The `const` keyword is a compile-time contract: it tells the compiler (and other developers) that something will NOT be modified. Used in three main ways in OOPs: **const member functions**, **const objects**, and **const data members**.
 
+Three types one should know
+1) Const Object
+2) Const member function
+3) Const data members
+
 ---
 
 ### 1. const Member Functions
@@ -19,6 +24,8 @@ See Example 1 in Const.cpp
 ---
 
 ### 2. const Objects
+
+A const object is an object whose state cannot be modified after initialization.
 
 An object declared `const` can ONLY call const member functions.
 
@@ -77,3 +84,5 @@ public:
 
 See Example 4 in Const.cpp
 
+
+Note: A non-const object can call both const and non-const member functions

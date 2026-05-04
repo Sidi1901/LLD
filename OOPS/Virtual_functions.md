@@ -173,3 +173,8 @@ This is how C++ models interfaces.
 | `virtual` in inheritance ≠ virtual functions | Different features; one controls layout, the other controls dispatch |
 
 See `Virtual_functions.cpp` for working examples of all three concepts.
+
+Note:
+Without virtual: If you delete a derived class object (e.g., SeasonalDiscount) using a base class pointer (DiscountStrategy*), only the base class part is cleaned up. This leads to memory leaks because the derived class's destructor is never triggered.
+
+With virtual: The program looks at the actual type of the object being pointed to and calls the derived destructor first, then the base destructor.

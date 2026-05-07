@@ -221,9 +221,6 @@ int main() {
 
 → when object types are few and unlikely to change
 
-##### Use Factory Method
-
-→ when system should be extensible and follow SOLID
 
 ---
 
@@ -231,8 +228,11 @@ int main() {
 
 Creates **families of related objects** without specifying their concrete classes. Think of it as a factory of factories.
 
+See solution 1
+
 ```cpp
 // Abstract products
+// Button and checkbox are family of related product (Notice in definition 'families of related products')
 class Button {
 public:
     virtual void render() = 0;
@@ -243,36 +243,8 @@ public:
     virtual void render() = 0;
 };
 
-// Concrete products — Windows family
-class WindowsButton : public Button {
-public:
-    void render() override { cout << "Windows Button\n"; }
-};
-
-class WindowsCheckbox : public Checkbox {
-public:
-    void render() override { cout << "Windows Checkbox\n"; }
-};
-
-// Concrete products — Mac family
-class MacButton : public Button {
-public:
-    void render() override { cout << "Mac Button\n"; }
-};
-
-class MacCheckbox : public Checkbox {
-public:
-    void render() override { cout << "Mac Checkbox\n"; }
-};
-
-// Abstract Factory
-class GUIFactory {
-public:
-    virtual Button* createButton() = 0;
-    virtual Checkbox* createCheckbox() = 0;
-};
-
 // Concrete Factories
+// Windows Factory has two factory createButton factory and create check box factory (Notice in definition factoy of factories)
 class WindowsFactory : public GUIFactory {
 public:
     Button* createButton() override { return new WindowsButton(); }

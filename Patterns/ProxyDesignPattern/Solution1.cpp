@@ -66,3 +66,28 @@ int main()
     delete img;
     return 0;
 }
+
+
+/* 
+Here are the real reasons the pattern exists:
+
+1. You don't own the real class
+RealImage might come from a third-party library or a legacy codebase. You can't modify its constructor — it always loads eagerly. The proxy wraps it without touching it.
+
+2. Single Responsibility
+RealImage's job is to display an image, not to decide when to load it. Mixing lazy-loading logic into it couples two concerns. The proxy takes on that concern separately.
+
+3. Access control / security proxy
+The proxy can add permission checks, logging, or rate-limiting around the real object — none of which belong in RealImage itself.
+
+
+void display() override {
+    if (!userIsAuthorized()) throw runtime_error("Access denied");
+    if (!realImage) realImage = new RealImage(filename);
+    realImage->display();
+}
+4. Remote proxy
+RealImage might live on a remote server. You can't put network call logic inside the real object — the proxy handles the transport layer transparently.
+
+Bottom line: If you own the class and lazy loading is the only concern, your version is simpler and fine. The proxy pattern earns its complexity when you can't modify the real class, or when you need to layer multiple behaviors (auth + caching + logging) without polluting the real object.
+*/

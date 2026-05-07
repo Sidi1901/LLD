@@ -59,13 +59,33 @@ Client → ProxyImage::display()
 
 `BankAccountProxy` wraps `RealBankAccount` and checks whether the caller is the account owner before allowing `withdraw()`. Deposits are open to anyone. The real object is never exposed directly to the client.
 
+### Solution 3 — Logging Proxy (auditing)
+[Solution3.cpp](Solution3.cpp)
+
+`LoggingPaymentProxy` wraps `RealPaymentService` and logs every call — method name, arguments, return value, and timestamp — without the real object knowing. The client talks to the same `PaymentService` interface throughout.
+
+```
+Client → LoggingPaymentProxy::pay()
+              ↓  log "pay() called — recipient: Alice, amount: $120"
+         real->pay("Alice", 120)
+              ↓  log "pay() returned — SUCCESS | new balance: $380"
+         return result
+```
+
+Proxies are stackable — you can chain them:
+```
+client → LoggingProxy → ProtectionProxy → RealService
+```
+Each layer adds one concern without knowing about the others.
+
 ---
 
 ## When to Use
 
 - Object creation is expensive and may not always be needed → **Virtual Proxy**
 - You need role-based or permission-based access control → **Protection Proxy**
-- You want to add logging, caching, or metrics without changing the real object
+- You want to add logging, caching, or metrics without changing the real object → **Logging / Caching Proxy**
+- The real object lives in a different process or machine → **Remote Proxy**
 
 ## When NOT to Use
 

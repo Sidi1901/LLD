@@ -2,7 +2,7 @@
 
 ## Intent
 
-Define a one-to-many dependency between objects so that when one object (the **Subject**) changes state, all its dependents (**Observers**) are notified and updated automatically.
+Define a one-to-many dependency between objects so that when one object (the **Subject/Obervable**) changes state, all its dependents (**Observers**) are notified and updated automatically.
 
 Also known as: **Publish-Subscribe**, **Event Listener**.
 
@@ -161,13 +161,17 @@ int main() {
 ```
 
 ---
-
 ## Push vs Pull Model
 
-| Model    | Description                                           | Trade-off                                                      |
-| -------- | ----------------------------------------------------- | -------------------------------------------------------------- |
-| **Push** | Subject sends data in `update(data)`                  | Observer gets data it may not need                             |
-| **Pull** | Observer calls `subject.getState()` inside `update()` | Observer controls what it fetches; tighter coupling to Subject |
+The Observer pattern defines how data travels after the Subject notifies observers — and you choose one of two models:
+
+**Push** : Subject sends data in `update(data)` but trade-off is Observer gets data it may not need                             |
+**Pull** : Observer calls `subject.getState()` inside `update()` but trade-off is Observer controls what it fetches i.e tighter coupling to Subject
+
+Pull model (Observer pattern)
+Subject still pushes a notification via update(). The observer then calls subject.getState() to fetch what it needs. It's still event-driven, not repeated checking. The trade-off is that the observer must hold a reference to the concrete subject and know its API — that's the tight coupling.
+
+See example for pull vs push
 
 ---
 

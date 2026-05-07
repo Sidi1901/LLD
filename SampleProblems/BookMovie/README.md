@@ -57,6 +57,10 @@ Added screen Object. Behind the scene, each screen has a show hosted. But end us
 4. SeatID is seatObj.ID
 5. City is a string representing the city name
 
+#### Few points to know
+1. A Booking belongs to a User. The booking is a transaction record — it needs to know who made it.
+This is a structural relationship: Booking cannot exist without a User. User can exist without booking though
+
 
 
 
